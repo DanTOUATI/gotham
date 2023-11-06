@@ -17,9 +17,12 @@ defmodule GothamWeb.UserJSON do
 
   defp data(%User{} = user) do
     %{
-      id: user.id,
-      email: user.email,
-      username: user.username
+			id: user.id,
+			email: user.email,
+			name: user.name,
+			surname: user.surname,
+			password: user.password,
+			roles: user.roles
     }
   end
 end

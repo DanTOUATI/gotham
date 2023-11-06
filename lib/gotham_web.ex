@@ -36,6 +36,27 @@ defmodule GothamWeb do
     end
   end
 
+	def view do
+		quote do
+			use Phoenix.View,
+					root: "lib/gotham_web/templates",
+					namespace: GothamWeb
+
+			# Import convenience functions from controllers
+			import Phoenix.Controller,
+						 only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+
+			# Include shared imports and aliases for views
+			unquote(view_helpers())
+		end
+	end
+
+	def view_helpers do
+		quote do
+			import Phoenix.HTML
+		end
+	end
+
   def controller do
     quote do
       use Phoenix.Controller,

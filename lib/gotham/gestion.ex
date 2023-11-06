@@ -36,6 +36,8 @@ defmodule Gotham.Gestion do
 	"""
 	def get_user!(id), do: Repo.get!(User, id)
 
+	def get_user(id), do: Repo.get(User, id)
+
 	@doc """
 	Creates a user.
 
@@ -51,6 +53,14 @@ defmodule Gotham.Gestion do
 		%User{}
 		|> User.changeset(attrs)
 		|> Repo.insert()
+	end
+
+	def get_user_by_mail(email) do
+		from(
+		u in User,
+		where: u.email == ^email,
+		)
+		|> Repo.one()
 	end
 
 	@doc """
@@ -69,19 +79,15 @@ defmodule Gotham.Gestion do
 		|> User.changeset(attrs)
 		|> Repo.update()
 	end
+
   @doc """
     Get user by username and email
   """
   def get_user_by_email_and_username(email, username) do
-
     case Repo.get_by(User, email: email, username: username) do
-
       nil -> {:error, :not_found}
-
       user -> {:ok, user}
-
     end
-
   end
 
 	@doc """
@@ -337,12 +343,10 @@ defmodule Gotham.Gestion do
 	iex> check_user_exists("nonexistent@example.com", "unknown_user")
 	false
 	"""
-	def check_user_exists(email, username) do
-		case Repo.get_by(User, email: email, username: username) do
+	def check_user_exists(email, surname) do
+		case Repo.get_by(User, email: email, surname: surname) do
 			nil -> false
 			_ -> true
 		end
 	end
-
-
 end
