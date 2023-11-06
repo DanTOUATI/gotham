@@ -33,10 +33,12 @@ defmodule GothamWeb.WorkingTimeController do
   def get_working_time_by_id(conn, %{"user_id" => user_id, "id" => id}) do
     working_times = Gestion.get_working_time_by_id(user_id, id)
     render(conn, :index, working_times: working_times)
-
-    #gestion d'erreur a faire
   end
 
+	def get_WKAll(conn, %{"user_id" => user_id}) do
+		working_times = Gestion.get_all_wt(user_id)
+		render(conn, :index, working_times: working_times)
+	end
 
   def update(conn, %{"id" => id, "working_time" => working_time_params}) do
     working_time = Gestion.get_working_time!(id)

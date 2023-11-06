@@ -49,7 +49,7 @@ defmodule GothamWeb.Router do
      get("/clocks/data/:id", ClockController, :show)
      post("/clocks/:user_id", ClockController, :create)
 
-     get("/working_timesAll", WorkingTimeController, :index)
+     get("/working_timesAll/:user_id", WorkingTimeController, :get_WKAll)
      get("/working_times/:user_id", WorkingTimeController, :get_all_workingTime_by_userid)
      get("/working_times/:user_id/:id", WorkingTimeController, :get_working_time_by_id)
      post("/working_times/:user_id", WorkingTimeController, :create)
