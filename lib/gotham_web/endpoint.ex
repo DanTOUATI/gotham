@@ -48,7 +48,7 @@ defmodule GothamWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
 	plug Corsica,
-			 origins: "http://localhost:8081", # Spécifiez l'origine à partir de laquelle les requêtes CORS sont autorisées
+			 origins: "http://localhost:8080", # Spécifiez l'origine à partir de laquelle les requêtes CORS sont autorisées
 			 allow_headers: :all, # Vous pouvez personnaliser les autres options CORS selon vos besoins
 			 allow_methods: :all,
 			 protocol_options: [

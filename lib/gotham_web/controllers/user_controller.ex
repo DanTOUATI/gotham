@@ -24,23 +24,14 @@ defmodule GothamWeb.UserController do
   end
 
   def get_user_by_email_and_username(conn, %{"email" => email, "username" => username}) do
-
     with {:ok, user} <- Gestion.get_user_by_email_and_username(email, username) do
-
       render(conn, :show, user: user)
-
     else
-
       {:error, :not_found} ->
-
         conn
-
         |> put_status(:not_found)
-
         |> json(%{error: "user with email: #{email} and username: #{username} not found"})
-
     end
-
   end
 
   def show(conn, %{"id" => id}) do
@@ -50,15 +41,13 @@ defmodule GothamWeb.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Gestion.get_user!(id)
-
     with {:ok, %User{} = user} <- Gestion.update_user(user, user_params) do
       render(conn, :show, user: user)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+	def delete(conn, %{"id" => id}) do
     user = Gestion.get_user!(id)
-
     with {:ok, %User{}} <- Gestion.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
